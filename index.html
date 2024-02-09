@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Actions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #redirectButton {
+            background-color: #3498db;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        #copyButton {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h2>Button Actions</h2>
+
+    <!-- Redirect Button -->
+    <a href="https://www.google.com/" target="_blank" class="button" id="redirectButton">Redirect to Link</a>
+
+    <!-- Copy Button -->
+    <button class="button" id="copyButton" onclick="copyToClipboard()">Copy Link</button>
+
+    <script>
+        function copyToClipboard() {
+            // Get the link text
+            var linkToCopy = document.createElement("input");
+            linkToCopy.value = "https://example.com"; // Replace with your desired link
+
+            // Append the input element to the body
+            document.body.appendChild(linkToCopy);
+
+            // Select the input element
+            linkToCopy.select();
+            linkToCopy.setSelectionRange(0, 99999); // For mobile devices
+
+            // Copy the text to the clipboard
+            document.execCommand("copy");
+
+            // Remove the input element
+            document.body.removeChild(linkToCopy);
+
+            // Display a message (you can customize this part)
+            alert("Link copied to clipboard: " + linkToCopy.value);
+        }
+    </script>
+</body>
+</html>
