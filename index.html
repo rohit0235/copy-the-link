@@ -22,16 +22,24 @@
             border: none;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
         }
 
-        #redirectButton {
-            background-color: #3498db;
-            color: #fff;
-            margin-right: 10px;
+        #linkInput {
+            width: 300px;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 16px;
         }
 
         #copyButton {
             background-color: #2ecc71;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        #redirectButton {
+            background-color: #3498db;
             color: #fff;
         }
     </style>
@@ -39,33 +47,32 @@
 <body>
     <h2>Button Actions</h2>
 
-    <!-- Redirect Button -->
-    <a href="https://www.google.com/" target="_blank" class="button" id="redirectButton">Redirect to Link</a>
+    <!-- Input for Link -->
+    <input type="text" id="linkInput" value="https://example.com" readonly>
 
     <!-- Copy Button -->
     <button class="button" id="copyButton" onclick="copyToClipboard()">Copy Link</button>
 
+    <!-- Redirect Button -->
+    <a href="#" class="button" id="redirectButton" onclick="redirectToLink()">Redirect to Link</a>
+
     <script>
         function copyToClipboard() {
-            // Get the link text
-            var linkToCopy = document.createElement("input");
-            linkToCopy.value = "https://www.google.com/"; // Replace with your desired link
+            var linkToCopy = document.getElementById("linkInput").value;
 
-            // Append the input element to the body
-            document.body.appendChild(linkToCopy);
-
-            // Select the input element
-            linkToCopy.select();
-            linkToCopy.setSelectionRange(0, 99999); // For mobile devices
-
-            // Copy the text to the clipboard
+            var tempInput = document.createElement("input");
+            tempInput.value = linkToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
             document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Link copied to clipboard: " + linkToCopy);
+        }
 
-            // Remove the input element
-            document.body.removeChild(linkToCopy);
-
-            // Display a message (you can customize this part)
-            alert("Link copied to clipboard: " + linkToCopy.value);
+        function redirectToLink() {
+            var linkToRedirect = document.getElementById("linkInput").value;
+            window.location.href = linkToRedirect;
         }
     </script>
 </body>
